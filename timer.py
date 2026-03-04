@@ -8,11 +8,9 @@ class TimerThread(threading.Thread):
         self._callback = on_break_due
         self._stop_event = threading.Event()
         self._lock = threading.Lock()
-        self._deadline = None
+        self._deadline = time.monotonic() + self._interval  # azonnal érvényes
 
     def run(self):
-        with self._lock:
-            self._deadline = time.monotonic() + self._interval
         while not self._stop_event.is_set():
             now = time.monotonic()
             with self._lock:
