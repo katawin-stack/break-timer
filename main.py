@@ -34,7 +34,7 @@ class TrayApp:
     def _make_timer(self):
         return TimerThread.from_settings(self._settings, self._on_break_due)
 
-    def _remaining_label(self):
+    def _remaining_label(self, _item=None):
         rem = int(self._timer.remaining_seconds())
         m, s = divmod(rem, 60)
         return f"Következő szünet: {m:02d}:{s:02d}"
