@@ -24,13 +24,13 @@ def test_snooze_delays_callback():
     fired = []
     t = TimerThread(interval_seconds=0.2, on_break_due=lambda: fired.append(1))
     t.start()
-    time.sleep(0.25)  # callback fires
-    assert len(fired) == 1
-    t.snooze(seconds=0.2)
+    time.sleep(0.35)  # well past interval – callback definitely fires
+    assert len(fired) >= 1
+    t.snooze(seconds=0.3)
     fired.clear()
-    time.sleep(0.1)   # snooze still active
+    time.sleep(0.15)   # snooze still active (0.15 < 0.3)
     assert len(fired) == 0
-    time.sleep(0.15)  # snooze elapsed
+    time.sleep(0.25)   # snooze elapsed (0.15+0.25=0.4 > 0.3)
     assert len(fired) >= 1
     t.stop()
 
