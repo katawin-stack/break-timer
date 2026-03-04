@@ -78,10 +78,12 @@ class TrayApp:
             max_snooze=self._settings.max_snooze_count,
             on_done=self._on_break_finished,
             on_snooze=self._on_snooze,
+            snooze_used=self._snooze_count,
         )
         threading.Thread(target=overlay.show, daemon=True).start()
 
     def _on_snooze(self, delay_seconds):
+        self._snooze_count += 1
         self._timer.snooze(seconds=delay_seconds)
 
     def _on_break_finished(self):

@@ -8,11 +8,11 @@ def _block_input(block: bool):
         pass
 
 class BreakOverlay:
-    def __init__(self, break_seconds, snooze_seconds, max_snooze, on_done=None, on_snooze=None):
+    def __init__(self, break_seconds, snooze_seconds, max_snooze, on_done=None, on_snooze=None, snooze_used=0):
         self._break_seconds = break_seconds
         self._snooze_seconds = snooze_seconds
         self._max_snooze = max_snooze
-        self._snooze_used = 0
+        self._snooze_used = snooze_used
         self._on_done = on_done
         self._on_snooze = on_snooze
         self._remaining = break_seconds
