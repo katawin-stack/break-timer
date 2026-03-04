@@ -122,4 +122,6 @@ class TrayApp:
 
 if __name__ == "__main__":
     app = TrayApp()
+    if "--settings" in sys.argv:
+        app._root.after(800, app._do_open_settings)
     app.run()
