@@ -107,9 +107,14 @@ class TrayApp:
         self._root.quit()
         sys.exit(0)
 
+    def _tick_tray(self):
+        self._tray.update_menu()
+        self._root.after(10000, self._tick_tray)
+
     def run(self):
         self._timer.start()
         threading.Thread(target=self._tray.run, daemon=True).start()
+        self._root.after(1000, self._tick_tray)
         self._root.mainloop()
 
 
