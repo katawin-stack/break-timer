@@ -61,7 +61,6 @@ class TrayApp:
         self._root.after(0, self._show_break_ui)
 
     def _show_break_ui(self):
-        self._snooze_count = 0
         if self._settings.mode == "forced":
             self._show_overlay()
         else:
@@ -87,6 +86,7 @@ class TrayApp:
         self._timer.snooze(seconds=delay_seconds)
 
     def _on_break_finished(self):
+        self._snooze_count = 0
         self._timer.reset()
 
     def _manual_break(self):
