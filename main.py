@@ -34,8 +34,15 @@ class TrayApp:
     def _make_timer(self):
         return TimerThread.from_settings(self._settings, self._on_break_due)
 
+    def _remaining_label(self):
+        rem = int(self._timer.remaining_seconds())
+        m, s = divmod(rem, 60)
+        return f"Következő szünet: {m:02d}:{s:02d}"
+
     def _make_tray(self):
         menu = pystray.Menu(
+            pystray.MenuItem(self._remaining_label, None, enabled=False),
+            pystray.Menu.SEPARATOR,
             pystray.MenuItem("Szünet most", self._manual_break),
             pystray.MenuItem("Beállítások", self._open_settings),
             pystray.Menu.SEPARATOR,
